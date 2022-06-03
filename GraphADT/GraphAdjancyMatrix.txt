@@ -1,0 +1,63 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+class edge {
+public:
+	int src,  des;
+	edge(int x, int y)
+	{
+		src = x;
+		des = y;
+	}
+	//for weighted graph implementation
+	// int wieght
+};
+class Graph {
+
+	int v;
+	vector<vector<int>> l;
+public:
+	Graph(int V)
+	{
+		this->v = V;
+		l.resize(V);
+	}
+	void addEdge(edge& e)
+	{
+		l[e.src].push_back(e.des);
+		
+	}
+	void print()
+	{
+
+		for (int I=0;I<v;I++)
+		{
+		
+			cout << I << "-->";
+			for (auto v:l[I])
+			{
+				
+				cout << v;
+				cout << " ";
+			}
+			cout << endl;
+		}
+	}
+};
+int main()
+{
+
+	Graph g(3);
+	vector<vector<int>> trust = { {1, 3} ,{2, 3} };
+	for (int i = 0; i < trust.size(); i++)
+	{
+		for (int j = 1; j < trust[i].size(); j++)
+		{
+			edge e(trust[i][0]-1, trust[i][j]-1);
+			g.addEdge(e);
+		}
+	}
+	
+	g.print();
+
+}

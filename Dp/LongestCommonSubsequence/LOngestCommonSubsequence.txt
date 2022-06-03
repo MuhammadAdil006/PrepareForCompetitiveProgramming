@@ -1,0 +1,35 @@
+#include <iostream>
+#include <string>
+#include <cstring>
+#include <cstring>
+using namespace std;
+//recursive solution
+//if last character matches then 1 + recursive call
+//else either max of 2nd last of 1st and last of 2nd or vice versa
+//e.g  ABCDE  AND ADCF
+//LAST DO NOT MATCH
+//THEN EITHER ABCDE ADC OR ABCD ADCF WHICH EVER IS MAX
+int lcs(char* a, char* b, int x, int y)
+{
+	if (x == -1 || y == -1)
+		return 0;
+	else if (a[x - 1] == b[x - 1])
+		return 1 + lcs(a, b, x - 1, y - 1);
+	else
+		return max(lcs(a, b, x - 1, y), lcs(a, b, x, y - 1));
+}
+int main()
+{
+	string s,b;
+	cin >> s;
+	cin >> b;
+	int x = s.length();
+	int y = b.length();
+	char* s1 = new char[x];
+	char* s2 = new char[y];
+	strcpy_s(s1,sizeof s1, s.c_str());
+	strcpy_s(s2,sizeof s2, b.c_str());
+	
+	cout << lcs(s1, s2, x, y);
+
+}
